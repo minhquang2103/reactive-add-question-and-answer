@@ -1,0 +1,45 @@
+<form [formGroup]="form"
+      class="row g-3">
+    <div *ngIf="isParagraph"
+         class="col-12">
+        <label class="form-label">{{questionForm.question}}</label>
+        <textarea formControlName="paragraph"
+                  rows="5"
+                  class="form-control"></textarea>
+
+    </div>
+
+    <div class="col-12">
+        <label>
+            Please select the languages you know:
+        </label>
+    </div>
+    <div *ngIf="isCheckbox"
+         class="col-12">
+        <div formArrayName="checkboxAnswer">
+            <div *ngFor="let checkbox of checkboxAnswer.controls; let i = index"
+                 class="form-check"
+                 formGroupName="{{ i }}">
+                <input type="checkbox"
+                       id="checkbox-{{i}}"
+                       class="form-check-input"
+                       [formControl]="checkbox.get('selected')" />
+                <label for="checkbox-{{i}}"
+                       class="form-check-label"> {{ checkbox.get('name').value }} </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <span (click)="onAddNewQuestion()"
+              class="border-bottom cursor-pointer">
+            Add New Question
+        </span>
+    </div>
+
+    <div class="dialog-action d-flex justify-content-end">
+        <button (click)="onReviewMyAnswer()"
+                type="button"
+                class="btn btn-light">Review my answers ></button>
+    </div>
+</form>

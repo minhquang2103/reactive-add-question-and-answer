@@ -1,0 +1,33 @@
+<ng-container *ngIf="answers$ | async as answers">
+    <div *ngFor="let dataItem of answers"
+         class="col-12">
+        <div class="col-12">
+            <label class="font-weight-bold mb-3">
+                {{dataItem.question.question}}
+            </label>
+        </div>
+
+        <div class="col-12">
+            <p>
+                {{dataItem.answer.paragraph}}
+            </p>
+        </div>
+
+        <div *ngIf="dataItem.answer.checkboxAnswer.length > 0" class="col-12">
+            <label class="font-weight-bold mb-3">
+                Please select the language(s) you know
+            </label>
+        </div>
+        <div *ngFor="let answer of dataItem.answer.checkboxAnswer" class="col-12 mb-2">
+            {{answer.name}}
+        </div>
+        <hr>
+    </div>
+
+    <div class="col-12 my-3">
+        <span (click)="onBackToFormBuilder()"
+              class="border-bottom cursor-pointer">
+            Back to Form Builder
+        </span>
+    </div>
+</ng-container>
