@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { WindowCloseResult } from '@progress/kendo-angular-dialog';
 import { of } from 'rxjs';
 import { concatMap, tap } from 'rxjs/operators';
+import { AnswerList } from 'src/app/core/models/answer-models';
 import { BackendService } from 'src/app/core/services/backend.service';
 import { WindowSharedService } from 'src/app/core/services/window-shared.service';
 
@@ -35,7 +36,7 @@ export class HomeComponent implements OnInit {
       concatMap(res => {
         if (res instanceof WindowCloseResult) return of()
         console.log("Answer:", res);
-        return this.backendService.newAnswer$(res)
+        return this.backendService.newAnswer$(res as AnswerList)
       }),
       tap(() => {
         this.router.navigate(["answer"])
